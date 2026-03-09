@@ -2,6 +2,7 @@ package com.example;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -9,25 +10,17 @@ public class App {
 
     public static void main(String[] args) {
 
-        // Set geckodriver path
         System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
 
         FirefoxOptions options = new FirefoxOptions();
-
-        // Set Firefox binary for Snap installation
         options.setBinary("/snap/firefox/current/usr/lib/firefox/firefox");
 
         WebDriver driver = new FirefoxDriver(options);
 
         try {
 
-            System.out.println("Starting Firefox Browser");
-
-            /* -------------------------------
-               1. SAUCEDEMO LOGIN
-            --------------------------------*/
-
-            driver.get("https://www.saucedemo.com/");
+            // TAB 1 - SauceDemo
+            driver.get("https://www.saucedemo.com");
 
             driver.findElement(By.id("user-name")).sendKeys("standard_user");
             driver.findElement(By.id("password")).sendKeys("secret_sauce");
@@ -35,15 +28,14 @@ public class App {
 
             Thread.sleep(3000);
 
-            if (driver.getCurrentUrl().contains("inventory")) {
+            if(driver.getCurrentUrl().contains("inventory"))
                 System.out.println("SauceDemo Login Successful");
-            } else {
+            else
                 System.out.println("SauceDemo Login Failed");
-            }
 
-            /* -------------------------------
-               2. PRACTICE TEST AUTOMATION
-            --------------------------------*/
+
+            // TAB 2 - Practice Test Automation
+            driver.switchTo().newWindow(WindowType.TAB);
 
             driver.get("https://practicetestautomation.com/practice-test-login/");
 
@@ -53,15 +45,14 @@ public class App {
 
             Thread.sleep(3000);
 
-            if (driver.getPageSource().contains("Logged In Successfully")) {
+            if(driver.getPageSource().contains("Logged In Successfully"))
                 System.out.println("PracticeTestAutomation Login Successful");
-            } else {
+            else
                 System.out.println("PracticeTestAutomation Login Failed");
-            }
 
-            /* -------------------------------
-               3. AUTOMATION EXERCISE LOGIN
-            --------------------------------*/
+
+            // TAB 3 - Automation Exercise
+            driver.switchTo().newWindow(WindowType.TAB);
 
             driver.get("https://automationexercise.com/login");
 
@@ -71,13 +62,12 @@ public class App {
 
             Thread.sleep(3000);
 
-            if (driver.getPageSource().contains("Logout")) {
+            if(driver.getPageSource().contains("Logout"))
                 System.out.println("AutomationExercise Login Successful");
-            } else {
+            else
                 System.out.println("AutomationExercise Login Failed");
-            }
 
-        } catch (Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
