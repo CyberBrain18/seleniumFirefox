@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/your-username/FirefoxMultiTabAutomation.git'
-            }
+                git branch: 'master', url: 'https://github.com/CyberBrain18/seleniumFirefox.git'            }
         }
 
         stage('Build') {
